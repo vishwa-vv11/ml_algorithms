@@ -11,13 +11,13 @@ y=df["target"]
 x=df.drop("target",axis=1)
 #train test split
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+#model
+model=LogisticRegression()
+model.fit(x_train,y_train)
 #feature scaling
 scaler=StandardScaler()
 x_train=scaler.fit_transform(x_train)   
 x_test=scaler.transform(x_test)
-#model
-model=LogisticRegression()
-model.fit(x_train,y_train)
 #predict
 y_pred=model.predict(x_test)
 #evaluate
