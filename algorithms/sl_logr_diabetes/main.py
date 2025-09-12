@@ -1,6 +1,7 @@
 #libraries
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -18,13 +19,13 @@ y=df["diabetes"]
 x=df.drop("diabetes",axis=1)
 #train test split
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+#model
+model=LogisticRegression()
+model.fit(x_train,y_train)
 #feature scaling
 scaler=StandardScaler()
 x_train=scaler.fit_transform(x_train)
 x_test=scaler.transform(x_test)
-#model
-model=LogisticRegression()
-model.fit(x_train,y_train)
 #predict
 y_pred=model.predict(x_test)
 #evaluate
@@ -35,5 +36,3 @@ print("Model Performance:")
 print("Accuracy:", round(accuracy,4))
 print("Confusion Matrix:\n", conf_matrix)
 print("Classification Report:\n", class_report)
-new_input=np.array([[0,56,0,1,2,25.56,6.0,135]])
-print("New Input Prediction (0=No Diabetes, 1=Diabetes):", model.predict(scaler.transform(new_input))[0])
